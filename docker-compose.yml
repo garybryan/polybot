@@ -1,0 +1,34 @@
+version: '3'
+services:
+  conv-backend-chatterbot:
+    build: conv-backend-chatterbot
+    ports:
+      - "8002:80"
+    command: /start-reload.sh
+    volumes:
+      - ./conv-backend-chatterbot/app:/app
+    networks:
+      - chatterbot
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_USERNAME: $MONGO_USERNAME
+      MONGO_PASSWORD: $MONGO_PASSWORD
+      MONGO_DATABASE: $MONGO_DATABASE
+
+  mongodb:
+    image: mongo:4.0.13
+    networks:
+      - chatterbot
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_USERNAME: $MONGO_USERNAME
+      MONGO_INITDB_PASSWORD: $MONGO_PASSWORD
+      MONGO_INITDB_DATABASE: $MONGO_DATABASE
+    volumes:
+      - ./mongo/init.sh:/docker-entrypoint-initdb.d/init.sh:ro
+
+networks:
+  chatterbot:
+    driver: bridge
