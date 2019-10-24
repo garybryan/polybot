@@ -1,5 +1,7 @@
 from chatterbot.trainers import ChatterBotCorpusTrainer
 
+from chatbot import chatbot
+
 def train(chatbot):
     trainer = ChatterBotCorpusTrainer(chatbot)
     print("Training beginning...")
@@ -7,3 +9,6 @@ def train(chatbot):
         "chatterbot.corpus.english",
     )
     print("Training finished")
+
+
+train(chatbot)

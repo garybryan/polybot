@@ -8,7 +8,6 @@ MONGO_USERNAME = os.environ.get('MONGO_USERNAME')
 MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD')
 
 database_uri = f'mongodb://{MONGO_USERNAME}:{MONGO_PASSWORD}@mongodb/{MONGO_DATABASE}'
-print(f'Connecting to {database_uri}')
 chatbot = ChatBot(
     'English chatbot',
     storage_adapter='chatterbot.storage.MongoDatabaseAdapter',

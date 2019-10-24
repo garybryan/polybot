@@ -6,5 +6,5 @@ mongo -- "$MONGO_INITDB_DATABASE" <<EOF
 
     var user = '$MONGO_INITDB_USERNAME';
     var passwd = '$MONGO_INITDB_PASSWORD';
-    db.createUser({user: user, pwd: passwd, roles: ["readWrite"]});
+    db.createUser({user: user, pwd: passwd, roles: ["root"], authenticationRestrictions: {clientSource: ['172.17.0.0/8', '127.0.0.1/24']}});
 EOF
