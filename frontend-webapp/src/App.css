@@ -1,0 +1,56 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-size: 110%;
+}
+
+.App-header {
+  background-color: #282c34;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+.ChatInterface {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ChatLogContainer {
+  flex: 1;
+  padding: 1em;
+}
+
+.ChatLog {
+  height: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ChatLine {
+  margin: 0.5em 0;
+}
+
+.ChatLineForm {
+  background-color: #4e5564;
+  display: flex;
+}
+
+.ChatLineForm .ChatLineInput {
+  margin: 3vh .8vw;
+  padding: .5em;
+  flex: 1;
+  font-size: 120%;
+}

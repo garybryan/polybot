@@ -1,5 +1,17 @@
 version: '3'
 services:
+  frontend-webapp:
+    build: frontend-webapp
+    ports:
+      - "8001:3000"
+    volumes:
+      - ./frontend-webapp:/app
+      - /app/node_modules
+    depends_on:
+      - conv-backend-chatterbot
+    environment:
+      API_URL_BASE: 'http://conv-backend-chatterbot'
+
   conv-backend-chatterbot:
     build: conv-backend-chatterbot
     ports:
@@ -7,8 +19,6 @@ services:
     command: /start-reload.sh
     volumes:
       - ./conv-backend-chatterbot/app:/app
-    networks:
-      - chatterbot
     depends_on:
       - mongodb
     environment:
@@ -18,8 +28,6 @@ services:
 
   mongodb:
     image: mongo:4.2-bionic
-    networks:
-      - chatterbot
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
@@ -29,10 +37,6 @@ services:
     volumes:
       - ./mongo/init.sh:/docker-entrypoint-initdb.d/init.sh:ro
       - mongo:/data/db
-
-networks:
-  chatterbot:
-    driver: bridge
 
 volumes:
   mongo:
