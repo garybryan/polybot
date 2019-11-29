@@ -7,6 +7,7 @@ def train(chatbot):
     print("Training beginning...")
     trainer.train(
         "chatterbot.corpus.english",
+        "chatterbot.corpus.french",
     )
     print("Training finished")
 
