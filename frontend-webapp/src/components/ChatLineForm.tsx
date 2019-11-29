@@ -1,14 +1,19 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+
+import { Line } from './ChatLine'
 
 const initialState = {
   text: ''
 }
 
-export default function ChatLineForm ({ appendLine }) {
+interface ChatLineFormProps {
+  appendLine: (line: Line) => void
+}
+
+export default function ChatLineForm ({ appendLine }: ChatLineFormProps) {
   const [state, setState] = useState(initialState)
 
-  const onSubmit = event => {
+  const onSubmit = (event: React.FormEvent): void => {
     event.preventDefault()
     if (state.text) {
       appendLine({ user: 'You', text: state.text })
@@ -16,15 +21,14 @@ export default function ChatLineForm ({ appendLine }) {
     }
   }
 
-  const handleChange = (event) => setState({ text: event.target.value.trim() })
+  const handleChange = (event: React.ChangeEvent): void => {
+    const element = event.target as HTMLInputElement
+    setState({ text: element.value.trim() })
+  }
 
   return (
     <form onSubmit={onSubmit} className="ChatLineForm">
       <input placeholder="Type some text..." type="text" value={state.text} onChange={handleChange} className="ChatLineInput" />
     </form>
   )
-}
-
-ChatLineForm.propTypes = {
-  appendLine: PropTypes.func
 }

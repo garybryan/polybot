@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import ChatLog from './ChatLog'
+import { Line } from './ChatLine'
 import ChatLineForm from './ChatLineForm'
 
 const dummyLog = [
@@ -9,7 +10,7 @@ const dummyLog = [
 
 export default function ChatInterface () {
   const [log, setLog] = useState(dummyLog)
-  const appendLine = line => {
+  const appendLine = (line: Line): void => {
     setLog(log => [...log, line])
   }
 

@@ -1,10 +1,13 @@
 import React from 'react'
 import ScrollableFeed from 'react-scrollable-feed'
-import PropTypes from 'prop-types'
 
-import ChatLine from './ChatLine'
+import ChatLine, { Line } from './ChatLine'
 
-export default function ChatLog ({ log }) {
+interface ChatLogProps {
+  log: Array<Line>
+}
+
+export default function ChatLog ({ log }: ChatLogProps) {
   return (
     <ScrollableFeed className="ChatLogContainer" viewableDetectionEpsilon={15}>
       {
@@ -16,6 +19,3 @@ export default function ChatLog ({ log }) {
   )
 }
 
-ChatLog.propTypes = {
-  log: PropTypes.array
-}
