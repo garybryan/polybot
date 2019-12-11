@@ -1,5 +1,4 @@
 import React from 'react'
-import ScrollableFeed from 'react-scrollable-feed'
 
 import ChatLine, { Line } from './ChatLine'
 
@@ -9,13 +8,13 @@ interface ChatLogProps {
 
 export default function ChatLog ({ log }: ChatLogProps) {
   return (
-    <ScrollableFeed className="ChatLogContainer" viewableDetectionEpsilon={15}>
+    <div className="ChatLogContainer">
       {
         log.map((line, index) =>
           <ChatLine { ...line } key={index} />
         )
       }
-    </ScrollableFeed>
+    </div>
   )
 }
 
