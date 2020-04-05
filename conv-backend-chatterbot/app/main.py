@@ -15,7 +15,7 @@ class Message(BaseModel):
     text: str
 
 
-@app.post("/message/")
+@app.post("/message")
 async def post_message(message: Message):
     response = chatbot.get_response(message.text)
     return Message(text=str(response))

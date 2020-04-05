@@ -6,6 +6,11 @@ export interface Line {
   text: string
 }
 
+export interface UserLine {
+  text: string
+}
+
+
 export default function ChatLine ({ user, text }: Line) {
   return (
     <div className="ChatLine"><strong>{ user }:</strong> { text }</div>

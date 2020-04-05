@@ -1,21 +1,23 @@
 import React, { useState } from 'react'
 
-import { Line } from './ChatLine'
+import { Line, UserLine } from './ChatLine'
 
 const initialState = {
   text: ''
 }
 
 interface ChatLineFormProps {
-  appendLine: (line: Line) => void
+  appendLine: (line: Line) => void,
+  sendLine: (line: UserLine) => void
 }
 
-export default function ChatLineForm ({ appendLine }: ChatLineFormProps) {
+export default function ChatLineForm ({ appendLine, sendLine }: ChatLineFormProps) {
   const [state, setState] = useState(initialState)
 
   const onSubmit = (event: React.FormEvent): void => {
     event.preventDefault()
     if (state.text) {
+      sendLine({ text: state.text })
       appendLine({ user: 'You', text: state.text })
       setState({ ...initialState })
     }

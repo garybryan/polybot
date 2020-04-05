@@ -13,7 +13,7 @@ module.exports = {
     historyApiFallback: true,
     hot: true,
     host: '0.0.0.0',
-    port: 8001
+    port: 80
   },
 
   // The application entry point
