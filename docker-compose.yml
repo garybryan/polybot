@@ -7,6 +7,17 @@ services:
     depends_on:
       - conv-backend-chatterbot
 
+  conv-backend-adaptor:
+    build: conv-backend-adaptor
+    command: /start-reload.sh
+    volumes:
+      - ./conv-backend-adaptor/app:/app
+    depends_on:
+      - conv-backend-chatterbot
+    environment:
+      BACKEND_CHATTERBOT_URL: http://conv-backend-chatterbot
+      BACKEND: chatterbot
+
   conv-backend-chatterbot:
     build: conv-backend-chatterbot
     command: /start-reload.sh

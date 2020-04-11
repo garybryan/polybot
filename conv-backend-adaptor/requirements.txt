@@ -1,0 +1,2 @@
+requests~=2.23.0
+email-validator~=1.0.0
