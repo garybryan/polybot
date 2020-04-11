@@ -5,9 +5,10 @@ from models import Message
 from .base import Backend
 
 class ChatterbotBackend(Backend):
-    def __init__(self, *args, **kwargs):
-        self.URL = BACKEND_CHATTERBOT.URL
+    URL = BACKEND_CHATTERBOT.URL
+    SEND_MESSAGE_URL = f'{URL}/message'
 
     def send_message(self, message: Message):
-        response = requests.post(f'{BACKEND_CHATTERBOT.URL}/message', data=message.json())
+        print('posting', self.SEND_MESSAGE_URL)
+        response = requests.post(self.SEND_MESSAGE_URL, json=message.dict())
         return Message.parse_obj(response.json())
