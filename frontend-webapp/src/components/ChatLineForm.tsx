@@ -17,7 +17,7 @@ export default function ChatLineForm ({ appendLine, sendLine }: ChatLineFormProp
   const onSubmit = (event: React.FormEvent): void => {
     event.preventDefault()
     if (state.text) {
-      sendLine({ text: state.text })
+      sendLine({ text: state.text.trim() })
       appendLine({ user: 'You', text: state.text })
       setState({ ...initialState })
     }
@@ -25,7 +25,7 @@ export default function ChatLineForm ({ appendLine, sendLine }: ChatLineFormProp
 
   const handleChange = (event: React.ChangeEvent): void => {
     const element = event.target as HTMLInputElement
-    setState({ text: element.value.trim() })
+    setState({ text: element.value })
   }
 
   return (
