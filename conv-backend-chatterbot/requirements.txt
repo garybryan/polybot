@@ -1,3 +1,4 @@
 chatterbot~=1.0.0
 chatterbot-corpus~=1.2.0
 email-validator~=1.0.0
+pytest~=5.4
