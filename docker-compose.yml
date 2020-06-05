@@ -5,7 +5,7 @@ services:
     volumes:
       - ./frontend-webapp:/app
     depends_on:
-      - conv-backend-chatterbot
+      - conv-backend-adaptor
 
   conv-backend-adaptor:
     build: conv-backend-adaptor
@@ -14,31 +14,38 @@ services:
       - ./conv-backend-adaptor/app:/app
     environment:
       BACKEND_CHATTERBOT_URL: http://conv-backend-chatterbot
-      BACKEND: chatterbot
+      BACKEND_ECHO_URL: http://conv-backend-echo
+      BACKEND: echo
 
-  conv-backend-chatterbot:
-    build: conv-backend-chatterbot
+  # conv-backend-chatterbot:
+  #   build: conv-backend-chatterbot
+  #   command: /start-reload.sh
+  #   volumes:
+  #     - ./conv-backend-chatterbot/app:/app
+  #   depends_on:
+  #     - mongodb
+  #   environment:
+  #     MONGO_USERNAME: $MONGO_USERNAME
+  #     MONGO_PASSWORD: $MONGO_PASSWORD
+  #     MONGO_DATABASE: $MONGO_DATABASE
+
+  conv-backend-echo:
+    build: conv-backend-echo
     command: /start-reload.sh
     volumes:
-      - ./conv-backend-chatterbot/app:/app
-    depends_on:
-      - mongodb
-    environment:
-      MONGO_USERNAME: $MONGO_USERNAME
-      MONGO_PASSWORD: $MONGO_PASSWORD
-      MONGO_DATABASE: $MONGO_DATABASE
+      - ./conv-backend-echo/app:/app
 
-  mongodb:
-    image: mongo:4.2-bionic
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
-      MONGO_INITDB_USERNAME: $MONGO_USERNAME
-      MONGO_INITDB_PASSWORD: $MONGO_PASSWORD
-      MONGO_INITDB_DATABASE: $MONGO_DATABASE
-    volumes:
-      - ./mongo/init.sh:/docker-entrypoint-initdb.d/init.sh:ro
-      - mongo:/data/db
+  # mongodb:
+  #   image: mongo:4.2-bionic
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: root
+  #     MONGO_INITDB_USERNAME: $MONGO_USERNAME
+  #     MONGO_INITDB_PASSWORD: $MONGO_PASSWORD
+  #     MONGO_INITDB_DATABASE: $MONGO_DATABASE
+  #   volumes:
+  #     - ./mongo/init.sh:/docker-entrypoint-initdb.d/init.sh:ro
+  #     - mongo:/data/db
 
   nginx:
     image: nginx:stable-alpine
@@ -47,7 +54,8 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
     depends_on:
-      - conv-backend-chatterbot
+      #- conv-backend-chatterbot
+      - conv-backend-echo
       - frontend-webapp
 
 volumes:
