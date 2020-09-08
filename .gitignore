@@ -126,3 +126,4 @@ dmypy.json
 # Pickles left by chatterbot
 **/*.pickle
 
+.vscode
