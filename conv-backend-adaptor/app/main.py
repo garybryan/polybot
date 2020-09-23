@@ -8,6 +8,7 @@ from message.post import post
 
 app = FastAPI()
 
-@app.post('/message')
+
+@app.post("/message")
 def post_message(message: Message):
     return post(message)

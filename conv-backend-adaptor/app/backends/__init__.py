@@ -4,8 +4,8 @@ from .echo import EchoBackend
 import config
 
 BACKENDS = {
-    'chatterbot': ChatterbotBackend,
-    'echo': EchoBackend,
+    "chatterbot": ChatterbotBackend,
+    "echo": EchoBackend,
 }
 
 backend = BACKENDS[config.BACKEND]()
