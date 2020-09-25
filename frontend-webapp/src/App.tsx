@@ -1,15 +1,15 @@
-import React from 'react'
-import Header from './components/Header'
-import ChatInterface from './components/ChatInterface'
-import './App.css'
+import React from "react";
+import Header from "./components/Header";
+import ChatInterface from "./components/ChatInterface";
+import "./App.css";
 
-function App () {
+function App() {
   return (
-    <div className="App">
+    <div className="correction_adaptor">
       <Header />
       <ChatInterface />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

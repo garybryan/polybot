@@ -2,7 +2,7 @@ import responses
 
 from starlette.testclient import TestClient
 
-from correction_adaptor.main import app
+from main import app
 
 client = TestClient(app)
 

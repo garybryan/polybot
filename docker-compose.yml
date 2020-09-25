@@ -16,10 +16,12 @@ services:
   correction-adaptor:
     build: correction-adaptor
     command: /start-reload.sh
-      - ./correction-adaptor/app:/app
+    volumes:
+      - ./correction-adaptor:/app
+    ports:
+      - 8002:80
     environment:
       BACKEND_ECHO_URL: http://correction-backend-echo
-      BACKEND_LANGUAGETOOL_URL: https://langaugetool.org/api/v2
       BACKEND: echo
 
   nginx:
