@@ -21,8 +21,10 @@ def test_backends_subclass_backend():
 
 
 def test_get_backend(mocker):
-    mocker.patch.dict("app.backends.backends.BACKENDS", {"mock_backend": MockBackend})
-    mocker.patch("app.backends.backends.Settings", patch_settings)
+    mocker.patch.dict(
+        "correction_adaptor.backends.backends.BACKENDS", {"mock_backend": MockBackend}
+    )
+    mocker.patch("correction_adaptor.backends.backends.Settings", patch_settings)
     from .backends import get_backend
 
     backend = get_backend()

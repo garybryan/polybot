@@ -11,9 +11,12 @@ def test_router():
 
 
 def test_post(mocker):
-    send_message = mocker.patch("app.test.helpers.MockBackend.send_message")
+    send_message = mocker.patch(
+        "correction_adaptor.test.helpers.MockBackend.send_message"
+    )
     mocker.patch(
-        "app.routers.message.get_backend", return_value=mock_backend_with_settings()
+        "correction_adaptor.routers.message.get_backend",
+        return_value=mock_backend_with_settings(),
     )
 
     message = Message(text="mock message")

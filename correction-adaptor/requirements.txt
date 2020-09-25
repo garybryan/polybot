@@ -1,7 +1,0 @@
-requests~=2.23
-responses~=0.10
-email-validator~=1.0
-fastapi~=0.61
-pytest~=6.0
-pytest-mock~=3.3
-python-dotenv~=0.14

@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "correction_adaptor"
+version = "0.0.0"
+description = "Correction backends adaptor"
+authors = ["Gary Bryan <garybryan@gmail.com>"]
+
+[tool.poetry.scripts]
+test = "pytest:main"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+email-validator = "^1.1.1"
+fastapi = "^0.61.1"
+requests = "^2.24.0"
+responses = "^0.12.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.0.2"
+pytest-mock = "^3.3.1"
+python-dotenv = "^0.14.0"
+responses = "^0.12.0"

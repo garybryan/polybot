@@ -2,7 +2,7 @@ import responses
 
 from starlette.testclient import TestClient
 
-from app.main import app
+from correction_adaptor.main import app
 
 client = TestClient(app)
 
@@ -14,7 +14,7 @@ def test_post_message():
     message = {"text": "hello"}
     reply = {"text": "hi"}
 
-    from app.settings import Settings
+    from correction_adaptor.settings import Settings
 
     # TODO handle errors and test it
     responses.add(responses.POST, SEND_MESSAGE_URL, json=reply, status=200)
