@@ -1,3 +1,0 @@
-requests~=2.23
-email-validator~=1.0
-pytest~=5.4
