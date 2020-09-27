@@ -8,9 +8,6 @@ version = "0.0.0"
 description = "Correction backends adaptor"
 authors = ["Gary Bryan <garybryan@gmail.com>"]
 
-[tool.poetry.scripts]
-test = "pytest:main"
-
 [tool.poetry.dependencies]
 python = "^3.8"
 email-validator = "^1.1.1"
