@@ -7,7 +7,7 @@ client = TestClient(app)
 
 def test_post_message():
     message = {"text": "hello!"}
-    reply = {"text": "You said: hello!"}
+    reply = {"text": "You said: hello!", "language": "en-GB"}
 
     response = client.post("/message", json=message)
 

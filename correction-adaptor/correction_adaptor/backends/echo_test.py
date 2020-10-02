@@ -14,10 +14,10 @@ def backend():
 def test_send_message(mocker, backend):
     post = mocker.patch("requests.post")
 
-    message = Message(text="test")
+    message = Message(text="ça va ?", language="fr")
     url = backend.send_message_url
 
-    reply = Message(text="reply")
+    reply = Message(text="ça va bien", language="fr")
     post.return_value.json.return_value = reply
 
     result = backend.send_message(message)

@@ -8,4 +8,4 @@ router = APIRouter()
 
 @router.post("/message")
 def post(message: Message) -> Message:
-    return Message(text=f"You said: {message.text}", langauge="en-GB")
+    return Message(text=f"You said: {message.text}", language="en-GB")

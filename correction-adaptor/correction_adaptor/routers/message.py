@@ -1,7 +1,6 @@
 from fastapi import APIRouter
-from functools import wraps
 
-from ..models import Message
+from ..models import CorrectedMessage, Message
 from ..backends import get_backend
 
 
@@ -9,7 +8,7 @@ router = APIRouter()
 
 
 @router.post("/message")
-def post(message: Message):
+def post(message: Message) -> CorrectedMessage:
     backend = get_backend()
-    reply = backend.send_message(message)
-    return reply
+    print("send message", message)
+    return backend.send_message(message)
