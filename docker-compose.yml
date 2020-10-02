@@ -24,6 +24,12 @@ services:
       BACKEND_ECHO_URL: http://correction-backend-echo
       BACKEND: echo
 
+  correction-backend-echo:
+    build: correction-backend-echo
+    command: /start-reload.sh
+    volumes:
+      - ./correction-backend-echo:/app
+
   nginx:
     image: nginx:stable-alpine
     ports:
