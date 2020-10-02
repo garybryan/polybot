@@ -1,8 +1,8 @@
 import pytest
 from requests.exceptions import HTTPError
 
-from ..models import Message
-from ..settings import BackendSettings
+from ...models import Message
+from ...settings import BackendSettings
 from .languagetool import LanguageToolBackend
 
 

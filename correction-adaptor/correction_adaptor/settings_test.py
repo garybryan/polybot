@@ -3,7 +3,6 @@ import os
 import pytest
 
 from pydantic.error_wrappers import ValidationError
-from unittest.mock import mock_open
 
 from .settings import Settings
 

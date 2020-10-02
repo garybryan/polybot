@@ -1,7 +1,7 @@
 import requests
 
-from ..models import Message
-from .base import Backend
+from ...models import Message
+from ..base import Backend
 
 
 class LanguageToolBackend(Backend):

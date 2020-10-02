@@ -2,9 +2,6 @@ from pydantic import BaseModel
 from typing import Optional
 
 
-Language = str
-
-
 class BaseMessage(BaseModel):
     text: str
 
