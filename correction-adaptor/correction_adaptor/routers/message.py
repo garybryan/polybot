@@ -10,5 +10,4 @@ router = APIRouter()
 @router.post("/message")
 def post(message: Message) -> CorrectedMessage:
     backend = get_backend()
-    print("send message", message)
     return backend.send_message(message)

@@ -1,7 +1,8 @@
+from correction_adaptor.backends.languagetool.mapping import map_message
 import pytest
 from requests.exceptions import HTTPError
 
-from ..models import Message
+from ..models import CorrectedMessage, Message
 from ..settings import BackendSettings
 from .echo import EchoBackend
 
@@ -17,7 +18,7 @@ def test_send_message(mocker, backend):
     message = Message(text="ça va ?", language="fr")
     url = backend.send_message_url
 
-    reply = Message(text="ça va bien", language="fr")
+    reply = CorrectedMessage(text="ça va bien", language="fr", corrections=[])
     post.return_value.json.return_value = reply
 
     result = backend.send_message(message)

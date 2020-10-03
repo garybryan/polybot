@@ -1,9 +1,11 @@
+from correction_adaptor.backends.languagetool.mapping import map_message
 import pytest
 from requests.exceptions import HTTPError
 
-from ...models import Message
+from ...models import CorrectedMessage, Message
 from ...settings import BackendSettings
 from .languagetool import LanguageToolBackend
+from .models import LanguageToolCorrectedMessage, LanguageToolMessage
 
 
 @pytest.fixture
@@ -12,18 +14,32 @@ def backend():
 
 
 def test_send_message(mocker, backend):
+    map_message = mocker.patch(
+        "correction_adaptor.backends.languagetool.languagetool.map_message"
+    )
+    map_corrected_message = mocker.patch(
+        "correction_adaptor.backends.languagetool.languagetool.map_corrected_message"
+    )
     post = mocker.patch("requests.post")
 
     message = Message(text="test")
+    lt_message = LanguageToolMessage(text="test", motherTongue="en-GB")
+    map_message.return_value = lt_message
+
     url = backend.send_message_url
 
-    reply = Message(text="reply")
+    reply = LanguageToolCorrectedMessage(text="reply", language="en-US", matches=[])
     post.return_value.json.return_value = reply
+
+    corrected_message = CorrectedMessage(text="reply", language="en-US", corrections=[])
+    map_corrected_message.return_value = corrected_message
 
     result = backend.send_message(message)
 
-    post.assert_called_once_with(url, json=message.dict())
-    assert result == reply
+    map_message.assert_called_once_with(message)
+    post.assert_called_once_with(url, json=lt_message.dict())
+    map_corrected_message.assert_called_once_with(reply)
+    assert result == corrected_message
 
 
 def test_send_message_connection_error(mocker, backend):

@@ -1,15 +1,51 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import List, Optional
 
 
 class BaseMessage(BaseModel):
     text: str
-
-
-class Message(BaseMessage):
     language: Optional[str]
 
 
-class CorrectedMessage(BaseMessage):
+class Message(BaseMessage):
+    user_language: Optional[str]
+    # TODO validate supported language string?
+
+
+class Suggestion(BaseModel):
+    value: str
+
+
+class Context(BaseModel):
     text: str
-    language: str
+    offset: int
+    length: int
+
+
+class Category(BaseModel):
+    id: str
+    name: str
+
+
+class Rule(BaseModel):
+    id: str
+    description: str
+    type: str
+    urls: Optional[List[str]]
+    category: Category
+
+
+class Correction(BaseModel):
+    message: str
+    short_message: str
+    suggestions: List[Suggestion]
+    offset: int
+    length: int
+    context: Context
+    rule: Rule
+    sentence: str
+
+
+class CorrectedMessage(BaseMessage):
+    corrections: List[Correction]
+    # TODO fields similar to LT
