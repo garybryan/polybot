@@ -1,0 +1,88 @@
+{
+  "software": {
+    "name": "LanguageTool",
+    "version": "5.2-SNAPSHOT",
+    "buildDate": "2020-10-03 08:01",
+    "apiVersion": 1,
+    "premium": false,
+    "premiumHint": "You might be missing errors only the Premium version can find. Contact us at support<at>languagetoolplus.com.",
+    "status": ""
+  },
+  "warnings": {
+    "incompleteResults": false
+  },
+  "language": {
+    "name": "English (GB)",
+    "code": "en-GB",
+    "detectedLanguage": {
+      "name": "English (US)",
+      "code": "en-US",
+      "confidence": 0.726
+    }
+  },
+  "matches": [
+    {
+      "message": "Statistics suggest that ‘there’ (as in ‘Is there an answer?’) might be the correct word here, not ‘their’ (as in ‘It’s not their fault.’). Please check.",
+      "shortMessage": "",
+      "replacements": [
+        {
+          "value": "there",
+          "shortDescription": "as in 'Is there an answer?'"
+        }
+      ],
+      "offset": 7,
+      "length": 5,
+      "context": {
+        "text": "I went their yestreday",
+        "offset": 7,
+        "length": 5
+      },
+      "sentence": "I went their yestreday",
+      "type": {
+        "typeName": "Other"
+      },
+      "rule": {
+        "id": "CONFUSION_RULE_THEIR_THERE",
+        "description": "Detect potentially wrong use of easily confused 'their' and 'there'",
+        "issueType": "non-conformance",
+        "category": {
+          "id": "TYPOS",
+          "name": "Possible Typo"
+        }
+      },
+      "ignoreForIncompleteSentence": false,
+      "contextForSureMatch": 3
+    },
+    {
+      "message": "Possible spelling mistake found.",
+      "shortMessage": "Spelling mistake",
+      "replacements": [
+        {
+          "value": "yesterday"
+        }
+      ],
+      "offset": 13,
+      "length": 9,
+      "context": {
+        "text": "I went their yestreday",
+        "offset": 13,
+        "length": 9
+      },
+      "sentence": "I went their yestreday",
+      "type": {
+        "typeName": "Other"
+      },
+      "rule": {
+        "id": "MORFOLOGIK_RULE_EN_GB",
+        "description": "Possible spelling mistake",
+        "issueType": "misspelling",
+        "category": {
+          "id": "TYPOS",
+          "name": "Possible Typo"
+        }
+      },
+      "ignoreForIncompleteSentence": false,
+      "contextForSureMatch": 0
+    }
+  ]
+}

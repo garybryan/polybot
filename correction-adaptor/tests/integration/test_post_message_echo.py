@@ -1,18 +1,31 @@
+import os
+import pytest
+import json
 import responses
 
+from pytest_mock.plugin import MockerFixture
 from starlette.testclient import TestClient
 
 from main import app
 
-client = TestClient(app)
+BACKEND = "echo"
+BASE_URL = "http://correction-backend-echo"
+BACKEND_SETTINGS = {"echo": {"base_url": BASE_URL}}
+MOCK_ENV = {"backend": BACKEND, "backend_settings": json.dumps(BACKEND_SETTINGS)}
 
-SEND_MESSAGE_URL = "http://correction-backend-echo/message"
-MESSAGE = {"text": "hello", "language": "en-GB", "user_language": None}
+SEND_MESSAGE_URL = f"{BASE_URL}/message"
+MESSAGE = {"text": "hello", "language": "en-GB"}
+
+
+@pytest.fixture
+def client(mocker: MockerFixture):
+    mocker.patch.dict(os.environ, MOCK_ENV)
+    return TestClient(app)
 
 
 @responses.activate
-def test_post_message():
-    reply = {"text": "hello", "language": "en-GB", "corrections": []}
+def test_post_message(client: TestClient):
+    reply = {"language": "en-GB", "corrections": []}
 
     responses.add(
         responses.POST,
@@ -28,14 +41,14 @@ def test_post_message():
     assert response.status_code == 200
 
 
-def test_post_message_missing():
+def test_post_message_missing(client: TestClient):
     response = client.post("/message", json={})
 
     assert response.status_code == 422
 
 
 @responses.activate
-def test_post_message_error():
+def test_post_message_error(client: TestClient):
 
     responses.add(
         responses.POST,
@@ -48,6 +61,6 @@ def test_post_message_error():
     assert response.status_code == 500
 
 
-def test_get_message_not_allowed():
+def test_get_message_not_allowed(client: TestClient):
     response = client.get("/message", json=MESSAGE)
     assert response.status_code == 405

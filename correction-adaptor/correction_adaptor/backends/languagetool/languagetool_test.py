@@ -28,16 +28,18 @@ def test_send_message(mocker, backend):
 
     url = backend.send_message_url
 
-    reply = LanguageToolCorrectedMessage(text="reply", language="en-US", matches=[])
+    reply = LanguageToolCorrectedMessage(language={"code": "en-US"}, matches=[])
     post.return_value.json.return_value = reply
 
-    corrected_message = CorrectedMessage(text="reply", language="en-US", corrections=[])
+    corrected_message = CorrectedMessage(language="en-US", corrections=[])
     map_corrected_message.return_value = corrected_message
 
     result = backend.send_message(message)
 
     map_message.assert_called_once_with(message)
-    post.assert_called_once_with(url, json=lt_message.dict())
+    post.assert_called_once_with(
+        url, json=lt_message.dict(exclude_unset=True, exclude_none=True)
+    )
     map_corrected_message.assert_called_once_with(reply)
     assert result == corrected_message
 

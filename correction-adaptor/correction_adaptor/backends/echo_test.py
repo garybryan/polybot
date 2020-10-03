@@ -1,4 +1,3 @@
-from correction_adaptor.backends.languagetool.mapping import map_message
 import pytest
 from requests.exceptions import HTTPError
 
@@ -18,12 +17,14 @@ def test_send_message(mocker, backend):
     message = Message(text="ça va ?", language="fr")
     url = backend.send_message_url
 
-    reply = CorrectedMessage(text="ça va bien", language="fr", corrections=[])
+    reply = CorrectedMessage(language="fr", corrections=[])
     post.return_value.json.return_value = reply
 
     result = backend.send_message(message)
 
-    post.assert_called_once_with(url, json=message.dict())
+    post.assert_called_once_with(
+        url, json=message.dict(exclude_unset=True, exclude_none=True)
+    )
     assert result == reply
 
 

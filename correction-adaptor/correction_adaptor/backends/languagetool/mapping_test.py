@@ -1,9 +1,11 @@
 from ...models import CorrectedMessage, Correction, Message, Context, Rule, Suggestion
 from .models import (
+    Language,
     LanguageToolCorrectedMessage,
     LanguageToolMessage,
     LanguageToolRule,
     Match,
+    Replacement,
 )
 from .mapping import map_corrected_message, map_message
 
@@ -23,8 +25,8 @@ def test_map_corrected_message():
     message = "Faute de frappe possible trouvée."
     short_message = "Faute de frappe"
     replacements = [
-        Suggestion(value="va"),
-        Suggestion(value="va "),
+        Replacement(value="va"),
+        Replacement(value="va a", shortDescription="Separate words"),
     ]
     offset = 3
     length = 3
@@ -42,7 +44,7 @@ def test_map_corrected_message():
     sentence = "Ça vaa."
 
     corrected_message = LanguageToolCorrectedMessage(
-        language=language,
+        language=Language(code=language),
         text=text,
         matches=[
             Match(
@@ -59,13 +61,15 @@ def test_map_corrected_message():
     )
 
     expected = CorrectedMessage(
-        text=text,
         language=language,
         corrections=[
             Correction(
                 message=message,
                 short_message=short_message,
-                suggestions=replacements,
+                suggestions=[
+                    Suggestion(value=r.value, short_description=r.shortDescription)
+                    for r in replacements
+                ],
                 offset=offset,
                 length=length,
                 context=context,

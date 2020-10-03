@@ -1,0 +1,58 @@
+{
+  "language": "en-GB",
+  "corrections": [
+    {
+      "message": "Statistics suggest that ‘there’ (as in ‘Is there an answer?’) might be the correct word here, not ‘their’ (as in ‘It’s not their fault.’). Please check.",
+      "short_message": "",
+      "suggestions": [
+        {
+          "value": "there",
+          "short_description": "as in 'Is there an answer?'"
+        }
+      ],
+      "offset": 7,
+      "length": 5,
+      "context": {
+        "text": "I went their yestreday",
+        "offset": 7,
+        "length": 5
+      },
+      "sentence": "I went their yestreday",
+      "rule": {
+        "id": "CONFUSION_RULE_THEIR_THERE",
+        "description": "Detect potentially wrong use of easily confused 'their' and 'there'",
+        "type": "non-conformance",
+        "category": {
+          "id": "TYPOS",
+          "name": "Possible Typo"
+        }
+      }
+    },
+    {
+      "message": "Possible spelling mistake found.",
+      "short_message": "Spelling mistake",
+      "suggestions": [
+        {
+          "value": "yesterday"
+        }
+      ],
+      "offset": 13,
+      "length": 9,
+      "context": {
+        "text": "I went their yestreday",
+        "offset": 13,
+        "length": 9
+      },
+      "sentence": "I went their yestreday",
+      "rule": {
+        "id": "MORFOLOGIK_RULE_EN_GB",
+        "description": "Possible spelling mistake",
+        "type": "misspelling",
+        "category": {
+          "id": "TYPOS",
+          "name": "Possible Typo"
+        }
+      }
+    }
+  ]
+}

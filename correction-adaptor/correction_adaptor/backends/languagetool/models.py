@@ -4,15 +4,12 @@ from pydantic.main import BaseModel
 
 from ...models import (
     BaseMessage,
-    CorrectedMessage,
-    Message,
     Category,
     Context,
-    Suggestion,
 )
 
 
-class LanguageToolMessage(Message):
+class LanguageToolMessage(BaseMessage):
     motherTongue: Optional[str]
 
 
@@ -25,16 +22,26 @@ class LanguageToolRule(BaseModel):
     category: Category
 
 
+class Replacement(BaseModel):
+    value: str
+    shortDescription: Optional[str]
+
+
 class Match(BaseModel):
     message: str
     shortMessage: str
     offset: int
     length: int
-    replacements: List[Suggestion]
+    replacements: List[Replacement]
     context: Context
     sentence: str
     rule: LanguageToolRule
 
 
-class LanguageToolCorrectedMessage(BaseMessage):
+class Language(BaseModel):
+    code: str
+
+
+class LanguageToolCorrectedMessage(BaseModel):
+    language: Language
     matches: List[Match]

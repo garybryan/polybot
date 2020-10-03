@@ -14,6 +14,7 @@ class Message(BaseMessage):
 
 class Suggestion(BaseModel):
     value: str
+    short_description: Optional[str]
 
 
 class Context(BaseModel):
@@ -46,6 +47,6 @@ class Correction(BaseModel):
     sentence: str
 
 
-class CorrectedMessage(BaseMessage):
+class CorrectedMessage(BaseModel):
+    language: str
     corrections: List[Correction]
-    # TODO fields similar to LT

@@ -1,4 +1,4 @@
-from ...models import CorrectedMessage, Correction, Message, Rule
+from ...models import CorrectedMessage, Correction, Message, Rule, Suggestion
 from .models import LanguageToolCorrectedMessage, LanguageToolMessage
 
 
@@ -14,13 +14,15 @@ def map_corrected_message(
     cm: LanguageToolCorrectedMessage,
 ) -> CorrectedMessage:
     return CorrectedMessage(
-        text=cm.text,
-        language=cm.language,
+        language=cm.language.code,
         corrections=[
             Correction(
                 message=m.message,
                 short_message=m.shortMessage,
-                suggestions=m.replacements,
+                suggestions=[
+                    Suggestion(value=r.value, short_description=r.shortDescription)
+                    for r in m.replacements
+                ],
                 offset=m.offset,
                 length=m.length,
                 context=m.context,
