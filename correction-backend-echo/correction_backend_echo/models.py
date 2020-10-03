@@ -6,3 +6,8 @@ from typing import Optional
 class Message(BaseModel):
     text: str
     language: Optional[str]
+
+
+class CorrectedMessage(BaseModel):
+    language: str
+    corrections: list

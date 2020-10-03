@@ -1,4 +1,4 @@
-from ..models import Message
+from ..models import CorrectedMessage, Message
 from .message import post, router
 
 
@@ -11,7 +11,13 @@ def test_router():
 
 def test_post():
     text = "mock message"
-    message = Message(text=text, language="en-GB")
+    message = Message(text=text, language="no")
     reply = post(message)
-    assert reply.text == f"You said: {text}"
-    assert reply.language == "en-GB"
+    assert reply == CorrectedMessage(language="no", corrections=[])
+
+
+def test_post_default_language():
+    text = "mock message"
+    message = Message(text=text)
+    reply = post(message)
+    assert reply == CorrectedMessage(language="en-US", corrections=[])

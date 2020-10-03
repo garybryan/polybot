@@ -6,8 +6,18 @@ client = TestClient(app)
 
 
 def test_post_message():
+    message = {"text": "hello!", "language": "en-GB"}
+    reply = {"language": "en-GB", "corrections": []}
+
+    response = client.post("/message", json=message)
+
+    assert response.json() == reply
+    assert response.status_code == 200
+
+
+def test_post_message_no_language():
     message = {"text": "hello!"}
-    reply = {"text": "You said: hello!", "language": "en-GB"}
+    reply = {"language": "en-US", "corrections": []}
 
     response = client.post("/message", json=message)
 
