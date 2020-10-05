@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Language, LogLine, TextLine } from '../interfaces/interfaces'
 
 const defaultLanguage = 'en-GB'
+const languageKey = 'polybot-language'
 
 interface State {
   text: string
@@ -10,7 +11,7 @@ interface State {
 
 const initialState = {
   text: '',
-  language: defaultLanguage
+  language: localStorage.getItem(languageKey) || defaultLanguage
 }
 
 interface ChatLineFormProps {
@@ -42,12 +43,15 @@ export default function ChatLineForm({
 
   const handleTextChange = (event: React.ChangeEvent): void => {
     const element = event.target as HTMLInputElement
-    setState({ ...state, text: element.value })
+    const text = element.value
+    setState({ ...state, text })
   }
 
   const handleLanguageChange = (event: React.ChangeEvent): void => {
     const element = event.target as HTMLSelectElement
-    setState({ ...state, language: element.value })
+    const language = element.value
+    setState({ ...state, language })
+    localStorage.setItem(languageKey, language)
   }
 
   return (
