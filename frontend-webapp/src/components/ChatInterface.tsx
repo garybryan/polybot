@@ -1,28 +1,30 @@
 import React, { useState } from 'react'
 
 import ChatLog from './ChatLog'
-import { Line, UserLine } from './ChatLine'
 import ChatLineForm from './ChatLineForm'
+import { Line, LogLine, TextLine } from '../interfaces/interfaces'
 
-const dummyLog = [
-  { user: 'Polybot', text: 'Hello!' }
-]
+const dummyLog = [{ user: 'Polybot', text: 'Hello!', language: 'en-GB' }]
 
-export default function ChatInterface () {
-  const [log, setLog] = useState(dummyLog)
+export default function ChatInterface() {
+  const [log, setLog] = useState<LogLine[]>(dummyLog)
 
-  const appendLine = (line: Line): void => {
+  const appendLine = (line: LogLine): void => {
     setLog(log => [...log, line])
   }
 
-  const sendLine = async (line: UserLine): Promise<void> => {
+  const sendLine = async (line: TextLine): Promise<void> => {
     const url = `/api/message`
     const response = await fetch(url, {
       method: 'post',
       body: JSON.stringify(line)
-    });
+    })
     const data = await response.json()
-    appendLine({ user: 'Polybot', text: data.text })
+    appendLine({
+      user: 'Polybot',
+      corrections: data.corrections,
+      language: data.language
+    })
   }
 
   return (

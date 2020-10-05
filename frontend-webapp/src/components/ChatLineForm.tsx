@@ -1,24 +1,33 @@
 import React, { useState } from 'react'
+import { LogLine, TextLine } from '../interfaces/interfaces'
 
-import { Line, UserLine } from './ChatLine'
+const language = 'en-GB' // Until we add support for selecting user language
+
+interface State {
+  text: string
+}
 
 const initialState = {
   text: ''
 }
 
 interface ChatLineFormProps {
-  appendLine: (line: Line) => void,
-  sendLine: (line: UserLine) => void
+  appendLine: (line: LogLine) => void
+  sendLine: (line: TextLine) => void
 }
 
-export default function ChatLineForm ({ appendLine, sendLine }: ChatLineFormProps) {
-  const [state, setState] = useState(initialState)
+export default function ChatLineForm({
+  appendLine,
+  sendLine
+}: ChatLineFormProps) {
+  const [state, setState] = useState<State>(initialState)
 
   const onSubmit = (event: React.FormEvent): void => {
     event.preventDefault()
     if (state.text) {
-      sendLine({ text: state.text.trim() })
-      appendLine({ user: 'You', text: state.text })
+      const line = { text: state.text.trim(), language, user: 'You' }
+      sendLine(line)
+      appendLine(line)
       setState({ ...initialState })
     }
   }
@@ -30,7 +39,13 @@ export default function ChatLineForm ({ appendLine, sendLine }: ChatLineFormProp
 
   return (
     <form onSubmit={onSubmit} className="ChatLineForm">
-      <input placeholder="Type some text..." type="text" value={state.text} onChange={handleChange} className="ChatLineInput" />
+      <input
+        placeholder="Type some text..."
+        type="text"
+        value={state.text}
+        onChange={handleChange}
+        className="ChatLineInput"
+      />
     </form>
   )
 }

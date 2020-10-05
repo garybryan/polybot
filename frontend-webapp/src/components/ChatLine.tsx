@@ -1,18 +1,14 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import { LogLine } from '../interfaces/interfaces'
+import ChatLineCorrection from './ChatLineCorrection'
+import ChatLineText from './ChatLineText'
 
-// TODO is there a better place to put an interface used by other modules?
-export interface Line {
-  user: string,
-  text: string
+interface ChatLineProps {
+  line: LogLine
 }
 
-export interface UserLine {
-  text: string
-}
-
-
-export default function ChatLine ({ user, text }: Line) {
-  return (
-    <div className="ChatLine"><strong>{ user }:</strong> { text }</div>
-  )
+export default function ChatLine({ line }: ChatLineProps) {
+  const content =
+    'corrections' in line ? ChatLineCorrection(line) : ChatLineText(line)
+  return <div className="chatLine">{content}</div>
 }

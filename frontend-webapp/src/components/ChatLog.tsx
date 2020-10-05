@@ -1,20 +1,18 @@
 import React from 'react'
+import { LogLine } from '../interfaces/interfaces'
 
-import ChatLine, { Line } from './ChatLine'
+import ChatLine from './ChatLine'
 
 interface ChatLogProps {
-  log: Array<Line>
+  log: LogLine[]
 }
 
-export default function ChatLog ({ log }: ChatLogProps) {
+export default function ChatLog({ log }: ChatLogProps) {
   return (
     <div className="ChatLogContainer">
-      {
-        log.map((line, index) =>
-          <ChatLine { ...line } key={index} />
-        )
-      }
+      {log.map((line, index) => (
+        <ChatLine line={line} key={index}></ChatLine>
+      ))}
     </div>
   )
 }
-
