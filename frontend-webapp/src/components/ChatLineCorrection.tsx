@@ -8,7 +8,7 @@ export default function ChatLineCorrection({
 }: CorrectionLine) {
   return (
     <Fragment>
-      <strong>{user}: Possible mistakes found:</strong>
+      <strong>{user}</strong>: Possible mistakes found:
       {corrections.length ? (
         <ol>
           {corrections.map((correction, index) => (
