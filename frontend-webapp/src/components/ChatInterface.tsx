@@ -4,7 +4,13 @@ import ChatLog from './ChatLog'
 import ChatLineForm from './ChatLineForm'
 import { Line, LogLine, TextLine } from '../interfaces/interfaces'
 
-const dummyLog = [{ user: 'Polybot', text: 'Hello!', language: 'en-GB' }]
+const dummyLog = [
+  {
+    user: 'Polybot',
+    text: "Hello! Send me a message and I'll try to correct it.",
+    language: 'en-GB'
+  }
+]
 
 export default function ChatInterface() {
   const [log, setLog] = useState<LogLine[]>(dummyLog)
