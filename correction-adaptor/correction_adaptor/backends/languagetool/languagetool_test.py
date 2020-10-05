@@ -38,7 +38,7 @@ def test_send_message(mocker, backend):
 
     map_message.assert_called_once_with(message)
     post.assert_called_once_with(
-        url, json=lt_message.dict(exclude_unset=True, exclude_none=True)
+        url, data=lt_message.dict(exclude_unset=True, exclude_none=True)
     )
     map_corrected_message.assert_called_once_with(reply)
     assert result == corrected_message

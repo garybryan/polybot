@@ -2,7 +2,7 @@ from correction_adaptor.exception_handlers import (
     http_error_handler,
     connection_error_handler,
 )
-from requests.models import HTTPError
+from requests.exceptions import ConnectionError, HTTPError
 
 
 def test_main(mocker):

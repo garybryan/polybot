@@ -13,14 +13,14 @@ from .mapping import map_corrected_message, map_message
 def test_map_message():
     kwargs = {
         "text": "test",
-        "language": "fr-FR",
+        "language": "fr",
     }
     message = Message(**kwargs, user_language="en-GB")
     assert map_message(message) == LanguageToolMessage(**kwargs, motherTongue="en-GB")
 
 
 def test_map_corrected_message():
-    language = "fr-FR"
+    language = "fr"
     text = "Ça vaa. Et toi ?"
     message = "Faute de frappe possible trouvée."
     short_message = "Faute de frappe"

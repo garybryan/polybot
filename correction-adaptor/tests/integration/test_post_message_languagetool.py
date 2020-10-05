@@ -4,8 +4,9 @@ import pytest
 import responses
 
 from pytest_mock.plugin import MockerFixture
-
+from requests.exceptions import ConnectionError
 from starlette.testclient import TestClient
+
 from main import app
 
 FIXTURE_BASE = "tests/fixtures/"
@@ -41,7 +42,7 @@ def test_post_message(client: TestClient):
     responses.add(
         responses.POST,
         SEND_MESSAGE_URL,
-        match=[responses.json_params_matcher(lt_message)],
+        match=[responses.urlencoded_params_matcher(lt_message)],
         json=provider_reply,
         status=200,
     )
@@ -57,12 +58,12 @@ def test_post_message_corrections(client: TestClient):
     message = {
         "text": "I went their yestreday",
         "language": "en-GB",
-        "user_language": "fr-FR",
+        "user_language": "fr",
     }
     lt_message = {
         "text": "I went their yestreday",
         "language": "en-GB",
-        "motherTongue": "fr-FR",
+        "motherTongue": "fr",
     }
 
     with open(f"{PROVIDER_FIXTURE_BASE}response.success.corrections.json") as f:
@@ -74,7 +75,7 @@ def test_post_message_corrections(client: TestClient):
     responses.add(
         responses.POST,
         SEND_MESSAGE_URL,
-        match=[responses.json_params_matcher(lt_message)],
+        match=[responses.urlencoded_params_matcher(lt_message)],
         json=provider_reply,
         status=200,
     )
@@ -100,12 +101,24 @@ def test_post_message_error(client: TestClient):
     responses.add(
         responses.POST,
         SEND_MESSAGE_URL,
-        match=[responses.json_params_matcher(message)],
-        status=500,
+        match=[responses.urlencoded_params_matcher(message)],
+        status=422,
     )
 
     response = client.post("/message", json=message)
-    assert response.status_code == 500
+    assert response.status_code == 422
+
+
+@responses.activate
+def test_post_message_connection_error(client: TestClient):
+    message = {"text": "hello", "language": "en-GB"}
+
+    responses.add(
+        responses.POST, SEND_MESSAGE_URL, body=ConnectionError("Cannot connect")
+    )
+
+    response = client.post("/message", json=message)
+    assert response.status_code == 502
 
 
 def test_get_message_not_allowed(client: TestClient):

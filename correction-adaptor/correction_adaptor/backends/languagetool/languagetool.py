@@ -13,7 +13,7 @@ class LanguageToolBackend(Backend):
         lt_message = map_message(message)
         response = requests.post(
             self.send_message_url,
-            json=lt_message.dict(exclude_unset=True, exclude_none=True),
+            data=lt_message.dict(exclude_unset=True, exclude_none=True),
         )
         response.raise_for_status()
         corrected_message = LanguageToolCorrectedMessage.parse_obj(response.json())

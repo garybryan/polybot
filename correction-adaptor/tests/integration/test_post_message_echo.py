@@ -3,6 +3,7 @@ import pytest
 import json
 import responses
 
+from requests.exceptions import ConnectionError
 from pytest_mock.plugin import MockerFixture
 from starlette.testclient import TestClient
 
@@ -54,11 +55,22 @@ def test_post_message_error(client: TestClient):
         responses.POST,
         SEND_MESSAGE_URL,
         match=[responses.json_params_matcher(MESSAGE)],
-        status=500,
+        status=422,
     )
 
     response = client.post("/message", json=MESSAGE)
-    assert response.status_code == 500
+    assert response.status_code == 422
+
+
+@responses.activate
+def test_post_message_connection_error(client: TestClient):
+
+    responses.add(
+        responses.POST, SEND_MESSAGE_URL, body=ConnectionError("Cannot connect")
+    )
+
+    response = client.post("/message", json=MESSAGE)
+    assert response.status_code == 502
 
 
 def test_get_message_not_allowed(client: TestClient):

@@ -21,8 +21,8 @@ services:
     ports:
       - 8002:80
     environment:
-      BACKEND_ECHO_URL: http://correction-backend-echo
-      BACKEND: echo
+      BACKEND_SETTINGS: '{"languagetool": {"base_url": "https://languagetool.org/api/v2"}}'
+      BACKEND: languagetool
 
   correction-backend-echo:
     build: correction-backend-echo
