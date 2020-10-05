@@ -38,10 +38,10 @@ class Match(BaseModel):
     rule: LanguageToolRule
 
 
-class Language(BaseModel):
+class LanguageToolLanguage(BaseModel):
     code: str
 
 
 class LanguageToolCorrectedMessage(BaseModel):
-    language: Language
+    language: LanguageToolLanguage
     matches: List[Match]

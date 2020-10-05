@@ -1,11 +1,14 @@
-from correction_adaptor.backends.languagetool.mapping import map_message
 import pytest
-from requests.exceptions import HTTPError
+from requests.exceptions import ConnectionError, HTTPError
 
 from ...models import CorrectedMessage, Message
 from ...settings import BackendSettings
 from .languagetool import LanguageToolBackend
-from .models import LanguageToolCorrectedMessage, LanguageToolMessage
+from .models import (
+    LanguageToolCorrectedMessage,
+    LanguageToolLanguage,
+    LanguageToolMessage,
+)
 
 
 MESSAGE = Message(text="test", language="en-GB")
@@ -32,7 +35,9 @@ def test_send_message(mocker, backend):
 
     url = backend.send_message_url
 
-    reply = LanguageToolCorrectedMessage(language={"code": "en-US"}, matches=[])
+    reply = LanguageToolCorrectedMessage(
+        language=LanguageToolLanguage(code="en-US"), matches=[]
+    )
     post.return_value.json.return_value = reply
 
     corrected_message = CorrectedMessage(language="en-US", corrections=[])
@@ -63,3 +68,14 @@ def test_send_message_http_error(mocker, backend):
 
     with pytest.raises(HTTPError):
         backend.send_message(MESSAGE)
+
+
+def test_parse_supported_languages(mocker, backend):
+    Language = mocker.patch(
+        "correction_adaptor.backends.languagetool.languagetool.Language"
+    )
+    language = Language(code="en-GB", name="British English")
+    languagetool_language = {"name": "English (GB)", "code": "en", "longCode": "en-GB"}
+
+    supported_languages = backend.parse_supported_languages([languagetool_language])
+    assert supported_languages == [language]

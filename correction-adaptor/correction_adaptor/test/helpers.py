@@ -9,8 +9,6 @@ SEND_MESSAGE_PATH = "fake-api/message"
 
 
 class MockBackend(Backend):
-    SEND_MESSAGE_PATH = "/message"
-
     def send_message(self, message: Message):
         pass
 

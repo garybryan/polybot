@@ -2,6 +2,11 @@ from pydantic import BaseModel
 from typing import List, Optional
 
 
+class Language(BaseModel):
+    code: str
+    name: str
+
+
 class BaseMessage(BaseModel):
     text: str
     language: str

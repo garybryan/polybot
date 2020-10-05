@@ -56,10 +56,12 @@ def test_post_message_error(client: TestClient):
         SEND_MESSAGE_URL,
         match=[responses.json_params_matcher(MESSAGE)],
         status=422,
+        body="Dodgy data",
     )
 
     response = client.post("/message", json=MESSAGE)
     assert response.status_code == 422
+    assert response.json() == {"message": "Dodgy data"}
 
 
 @responses.activate
@@ -71,6 +73,7 @@ def test_post_message_connection_error(client: TestClient):
 
     response = client.post("/message", json=MESSAGE)
     assert response.status_code == 502
+    assert response.json() == {"message": "Cannot connect"}
 
 
 def test_get_message_not_allowed(client: TestClient):

@@ -1,6 +1,7 @@
+from typing import List
 import requests
 
-from ...models import CorrectedMessage, Message
+from ...models import CorrectedMessage, Language, Message
 from ..base import Backend
 from .models import LanguageToolCorrectedMessage
 from .mapping import map_corrected_message, map_message
@@ -18,3 +19,9 @@ class LanguageToolBackend(Backend):
         response.raise_for_status()
         corrected_message = LanguageToolCorrectedMessage.parse_obj(response.json())
         return map_corrected_message(corrected_message)
+
+    def parse_supported_languages(self, languages: List[dict]) -> List[Language]:
+        return [
+            Language(code=language["longCode"], name=language["name"])
+            for language in languages
+        ]

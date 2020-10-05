@@ -1,5 +1,5 @@
 import pytest
-from requests.exceptions import HTTPError
+from requests.exceptions import ConnectionError, HTTPError
 
 from ..models import CorrectedMessage, Message
 from ..settings import BackendSettings
@@ -10,7 +10,7 @@ MESSAGE = Message(text="test", language="en-GB")
 
 
 @pytest.fixture
-def backend():
+def backend() -> EchoBackend:
     return EchoBackend(BackendSettings(base_url="http://backend-echo/"))
 
 

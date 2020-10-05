@@ -1,7 +1,7 @@
 from ...models import CorrectedMessage, Correction, Message, Context, Rule, Suggestion
 from .models import (
-    Language,
     LanguageToolCorrectedMessage,
+    LanguageToolLanguage,
     LanguageToolMessage,
     LanguageToolRule,
     Match,
@@ -44,7 +44,7 @@ def test_map_corrected_message():
     sentence = "Ça vaa."
 
     corrected_message = LanguageToolCorrectedMessage(
-        language=Language(code=language),
+        language=LanguageToolLanguage(code=language),
         text=text,
         matches=[
             Match(
