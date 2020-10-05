@@ -2,12 +2,16 @@
 
 ## Development
 
+To run a local development server:
+
+```
 docker-compose up
+```
+
+This runs the front-end on http://localhost:8001, and the Corrections API on http://localhost:8001/api.
 
 ## Testing
 
-To run tests:
+`pytest` can be run for the Python backend libraries.
 
-Start docker-compose as above, then:
-
-./test.sh
+Front-end and end-to-end tests not yet implemented.
