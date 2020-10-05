@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import ChatLog from './ChatLog'
 import ChatLineForm from './ChatLineForm'
-import { Line, LogLine, TextLine } from '../interfaces/interfaces'
+import { Language, LogLine, TextLine } from '../interfaces/interfaces'
 
 const dummyLog = [
   {
@@ -14,14 +14,23 @@ const dummyLog = [
 
 export default function ChatInterface() {
   const [log, setLog] = useState<LogLine[]>(dummyLog)
+  const [languages, setLanguages] = useState<Language[]>([])
+
+  useEffect(() => {
+    async function getLanguages() {
+      const response = await fetch('/api/languages')
+      const languages = await response.json()
+      setLanguages(languages)
+    }
+    getLanguages()
+  }, [])
 
   const appendLine = (line: LogLine): void => {
     setLog(log => [...log, line])
   }
 
   const sendLine = async (line: TextLine): Promise<void> => {
-    const url = `/api/message`
-    const response = await fetch(url, {
+    const response = await fetch('/api/message', {
       method: 'post',
       body: JSON.stringify(line)
     })
@@ -36,7 +45,11 @@ export default function ChatInterface() {
   return (
     <main className="ChatInterface">
       <ChatLog log={log} />
-      <ChatLineForm appendLine={appendLine} sendLine={sendLine} />
+      <ChatLineForm
+        languages={languages}
+        appendLine={appendLine}
+        sendLine={sendLine}
+      />
     </main>
   )
 }

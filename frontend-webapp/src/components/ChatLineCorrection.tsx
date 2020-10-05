@@ -8,13 +8,16 @@ export default function ChatLineCorrection({
 }: CorrectionLine) {
   return (
     <Fragment>
-      <strong>{user}</strong>: Possible mistakes found:
+      <strong>{user}: </strong>
       {corrections.length ? (
-        <ol>
-          {corrections.map((correction, index) => (
-            <CorrectionItem key={index} correction={correction} />
-          ))}
-        </ol>
+        <Fragment>
+          Possible mistakes found
+          <ol>
+            {corrections.map((correction, index) => (
+              <CorrectionItem key={index} correction={correction} />
+            ))}
+          </ol>
+        </Fragment>
       ) : (
         <span>Looks good!</span>
       )}

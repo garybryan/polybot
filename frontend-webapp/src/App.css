@@ -48,9 +48,17 @@
   display: flex;
 }
 
-.ChatLineForm .ChatLineInput {
-  margin: 3vh .8vw;
-  padding: .5em;
-  flex: 1;
+.ChatLineForm .ChatLineInput,
+.ChatLineForm .LanguageSelect {
+  margin: 3vh 0.8vw;
+  padding: 0.5em;
   font-size: 120%;
+}
+
+.ChatLineForm .ChatLineInput {
+  flex: 1;
+}
+
+.ChatLineForm .LanguageSelect {
+  flex: 0 1;
 }

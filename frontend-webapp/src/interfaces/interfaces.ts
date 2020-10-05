@@ -31,3 +31,8 @@ export interface CorrectionLine extends UserLine {
 }
 
 export type LogLine = TextLine | CorrectionLine
+
+export interface Language {
+  name: string
+  code: string
+}

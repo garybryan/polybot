@@ -1,49 +1,73 @@
 import React, { useState } from 'react'
-import { LogLine, TextLine } from '../interfaces/interfaces'
+import { Language, LogLine, TextLine } from '../interfaces/interfaces'
 
-const language = 'en-GB' // Until we add support for selecting user language
+const defaultLanguage = 'en-GB'
 
 interface State {
   text: string
+  language: string
 }
 
 const initialState = {
-  text: ''
+  text: '',
+  language: defaultLanguage
 }
 
 interface ChatLineFormProps {
   appendLine: (line: LogLine) => void
   sendLine: (line: TextLine) => void
+  languages: Language[]
 }
 
 export default function ChatLineForm({
   appendLine,
-  sendLine
+  sendLine,
+  languages
 }: ChatLineFormProps) {
   const [state, setState] = useState<State>(initialState)
 
   const onSubmit = (event: React.FormEvent): void => {
     event.preventDefault()
     if (state.text) {
-      const line = { text: state.text.trim(), language, user: 'You' }
+      const line = {
+        text: state.text.trim(),
+        language: state.language,
+        user: 'You'
+      }
       sendLine(line)
       appendLine(line)
-      setState({ ...initialState })
+      setState({ ...state, text: '' })
     }
   }
 
-  const handleChange = (event: React.ChangeEvent): void => {
+  const handleTextChange = (event: React.ChangeEvent): void => {
     const element = event.target as HTMLInputElement
-    setState({ text: element.value })
+    setState({ ...state, text: element.value })
+  }
+
+  const handleLanguageChange = (event: React.ChangeEvent): void => {
+    const element = event.target as HTMLSelectElement
+    setState({ ...state, language: element.value })
   }
 
   return (
     <form onSubmit={onSubmit} className="ChatLineForm">
+      <select
+        value={state.language}
+        className="LanguageSelect"
+        onChange={handleLanguageChange}
+      >
+        {languages.map(language => (
+          <option key={language.code} value={language.code}>
+            {language.name}
+          </option>
+        ))}
+      </select>
       <input
         placeholder="Type some text..."
         type="text"
         value={state.text}
-        onChange={handleChange}
+        onChange={handleTextChange}
         className="ChatLineInput"
       />
     </form>
