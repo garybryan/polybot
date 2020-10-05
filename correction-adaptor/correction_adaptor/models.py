@@ -4,12 +4,11 @@ from typing import List, Optional
 
 class BaseMessage(BaseModel):
     text: str
-    language: Optional[str]
+    language: str
 
 
 class Message(BaseMessage):
     user_language: Optional[str]
-    # TODO validate supported language string?
 
 
 class Suggestion(BaseModel):

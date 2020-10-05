@@ -19,6 +19,6 @@ def test_post(mocker):
         return_value=mock_backend_with_settings(),
     )
 
-    message = Message(text="mock message")
+    message = Message(text="mock message", language="en-GB")
     post(message)
     send_message.assert_called_once_with(message)

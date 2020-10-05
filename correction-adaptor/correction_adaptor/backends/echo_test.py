@@ -6,6 +6,9 @@ from ..settings import BackendSettings
 from .echo import EchoBackend
 
 
+MESSAGE = Message(text="test", language="en-GB")
+
+
 @pytest.fixture
 def backend():
     return EchoBackend(BackendSettings(base_url="http://backend-echo/"))
@@ -31,19 +34,15 @@ def test_send_message(mocker, backend):
 def test_send_message_connection_error(mocker, backend):
     post = mocker.patch("requests.post")
 
-    message = Message(text="test")
-
     post.side_effect = ConnectionError()
 
     with pytest.raises(ConnectionError):
-        backend.send_message(message)
+        backend.send_message(MESSAGE)
 
 
 def test_send_message_http_error(mocker, backend):
     post = mocker.patch("requests.post")
     post.return_value.raise_for_status.side_effect = HTTPError()
 
-    message = Message(text="test")
-
     with pytest.raises(HTTPError):
-        backend.send_message(message)
+        backend.send_message(MESSAGE)
