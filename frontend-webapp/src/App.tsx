@@ -5,7 +5,7 @@ import './App.css'
 
 function App() {
   return (
-    <div className="correction_adaptor">
+    <div className="App">
       <Header />
       <ChatInterface />
     </div>
