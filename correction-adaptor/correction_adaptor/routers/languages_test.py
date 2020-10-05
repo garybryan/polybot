@@ -10,7 +10,7 @@ def test_router():
     assert route.methods == {"GET"}
 
 
-def test_post(mocker):
+def test_get(mocker):
     supported_languages = mocker.patch(
         "correction_adaptor.test.helpers.MockBackend.supported_languages",
         new_callable=PropertyMock,
