@@ -46,19 +46,23 @@
 .ChatLineForm {
   background-color: #4e5564;
   display: flex;
+  flex-wrap: wrap;
+  padding: 1vh 1vh 0;
+  justify-content: space-around;
 }
 
 .ChatLineForm .ChatLineInput,
 .ChatLineForm .LanguageSelect {
-  margin: 3vh 0.8vw;
   padding: 0.5em;
   font-size: 120%;
-}
-
-.ChatLineForm .ChatLineInput {
-  flex: 1;
+  margin-bottom: 1vh;
 }
 
 .ChatLineForm .LanguageSelect {
   flex: 0 1;
+  margin-right: 1vh;
+}
+
+.ChatLineForm .ChatLineInput {
+  flex: 1;
 }
