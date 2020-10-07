@@ -10,7 +10,6 @@ export default function CorrectionItem({ correction }: CorrectionProperties) {
     <li>
       <strong>{correction.message}</strong>
       <br />
-      Offset {correction.offset}, length {correction.length}<br />
       Suggestions:
       <ol>
         {correction.suggestions.map((suggestion, index) => (

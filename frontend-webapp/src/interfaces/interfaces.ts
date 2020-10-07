@@ -26,7 +26,7 @@ export interface Correction {
   sentence: string
 }
 
-export interface CorrectionLine extends UserLine {
+export interface CorrectionLine extends TextLine {
   corrections: Correction[]
 }
 

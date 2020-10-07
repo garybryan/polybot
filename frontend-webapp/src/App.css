@@ -66,3 +66,13 @@
 .ChatLineForm .ChatLineInput {
   flex: 1;
 }
+
+.CorrectedLine {
+  font-style: italic;
+}
+
+.CorrectedLine .Correction {
+  background-color: #ffe5e5;
+  color: #800;
+  text-decoration: underline dotted '#b00';
+}

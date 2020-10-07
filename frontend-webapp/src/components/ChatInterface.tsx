@@ -38,7 +38,8 @@ export default function ChatInterface() {
     appendLine({
       user: 'Polybot',
       corrections: data.corrections,
-      language: data.language
+      language: data.language,
+      text: line.text
     })
   }
 
