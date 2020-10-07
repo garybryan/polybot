@@ -13,8 +13,12 @@ export default function CorrectionItem({ correction }: CorrectionProperties) {
       Suggestions:
       <ol>
         {correction.suggestions.map((suggestion, index) => (
-            <li key={index}><em>{suggestion.value}</em>{suggestion.short_description && ` (${suggestion.short_description})`}</li>
-        )}
+          <li key={index}>
+            <em>{suggestion.value}</em>
+            {suggestion.short_description &&
+              ` (${suggestion.short_description})`}
+          </li>
+        ))}
       </ol>
     </li>
   )
