@@ -30,6 +30,7 @@
 .ChatLogContainer {
   flex: 1;
   padding: 1em;
+  overflow-y: auto;
 }
 
 .ChatLog {
