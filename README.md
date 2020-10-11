@@ -25,6 +25,5 @@ Front-end and end-to-end tests not yet implemented.
 ## Known issues
 
 - Texts are not corrected properly when "English" is selected; a regional variant e.g. "English (GB)" must be chosen.
-- Chat scrollback doesn't go to bottom when sending/receiving new message.
 - It doesn't look very good yet, and presentation of corrections and suggestions is to be improved!
 - Corrections are currently only in the same language as the message, e.g. German grammar mistakes are explained in German, which might not be very friendly for beginners.
