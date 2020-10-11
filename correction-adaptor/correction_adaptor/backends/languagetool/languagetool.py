@@ -17,6 +17,7 @@ class LanguageToolBackend(Backend):
             data=lt_message.dict(exclude_unset=True, exclude_none=True),
         )
         response.raise_for_status()
+        print("RESPONSE", response.json())
         corrected_message = LanguageToolCorrectedMessage.parse_obj(response.json())
         return map_corrected_message(corrected_message)
 

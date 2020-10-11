@@ -6,6 +6,7 @@ from .models import (
     LanguageToolRule,
     Match,
     Replacement,
+    URL,
 )
 from .mapping import map_corrected_message, map_message
 
@@ -35,6 +36,7 @@ def test_map_corrected_message():
         description="Faute de frappe possible",
         issueType="misspelling",
         category={"id": "TYPOS", "name": "Faute de frappe possible"},
+        urls=[URL(value="http://www.example.com")],
     )
     context = Context(
         text=text,
@@ -77,7 +79,7 @@ def test_map_corrected_message():
                     id=rule.id,
                     description=rule.description,
                     type=rule.issueType,
-                    urls=rule.urls,
+                    urls=[rule.urls[0].value],
                     category=rule.category,
                 ),
                 sentence=sentence,

@@ -13,12 +13,16 @@ class LanguageToolMessage(BaseMessage):
     motherTongue: Optional[str]
 
 
+class URL(BaseModel):
+    value: str
+
+
 class LanguageToolRule(BaseModel):
     id: str
     subId: Optional[str]
     description: str
     issueType: str
-    urls: Optional[List[str]]
+    urls: Optional[List[URL]]
     category: Category
 
 

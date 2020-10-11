@@ -30,7 +30,7 @@ def map_corrected_message(
                     id=m.rule.id,
                     description=m.rule.description,
                     type=m.rule.issueType,
-                    urls=m.rule.urls,
+                    urls=[u.value for u in m.rule.urls] if m.rule.urls else None,
                     category=m.rule.category,
                 ),
                 sentence=m.sentence,
