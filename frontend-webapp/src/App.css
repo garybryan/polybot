@@ -83,6 +83,7 @@
   background-color: #d6ffd6;
   color: #0a0;
   border: 1px solid #0a0;
+  cursor: default;
 }
 
 .CorrectionView {
