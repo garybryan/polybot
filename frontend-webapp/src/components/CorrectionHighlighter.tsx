@@ -45,6 +45,17 @@ export default function CorrectionHighlighter({
       </span>
     )
 
+    if (correction.suggestions.length === 1) {
+      nodes.push(
+        <span>
+          →
+          <span className="Correction Suggestion">
+            {correction.suggestions[0].value}
+          </span>
+        </span>
+      )
+    }
+
     // Add any text after the correction.
     const nextIndex =
       i < sortedCorrections.length - 1
