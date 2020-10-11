@@ -4,11 +4,15 @@ import { Correction } from '../interfaces/interfaces'
 interface CorrectionHighligherProps {
   text: string
   corrections: Correction[]
+  selectedCorrection: Correction
+  setSelectedCorrection(correction: Correction): void
 }
 
 export default function CorrectionHighlighter({
   text,
-  corrections
+  corrections,
+  selectedCorrection,
+  setSelectedCorrection
 }: CorrectionHighligherProps) {
   if (!corrections.length) {
     return null
@@ -29,7 +33,16 @@ export default function CorrectionHighlighter({
     const offset = correction.offset
     const end = offset + correction.length
 
-    nodes.push(<span className="Correction">{text.slice(offset, end)}</span>)
+    nodes.push(
+      <span
+        className={`Correction ${
+          selectedCorrection === correction ? 'Selected' : ''
+        }`}
+        onClick={() => setSelectedCorrection(correction)}
+      >
+        {text.slice(offset, end)}
+      </span>
+    )
 
     // Add any text after the correction.
     const nextIndex =
@@ -41,5 +54,5 @@ export default function CorrectionHighlighter({
     }
   }
 
-  return <div className="CorrectedLine">{nodes}</div>
+  return <span className="CorrectedLine">{nodes}</span>
 }

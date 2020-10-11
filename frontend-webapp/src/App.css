@@ -33,15 +33,8 @@
   overflow-y: auto;
 }
 
-.ChatLog {
-  height: 100%;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
 .ChatLine {
-  margin: 0.5em 0;
+  margin: 0.4em 0;
 }
 
 .ChatLineForm {
@@ -75,5 +68,33 @@
 .CorrectedLine .Correction {
   background-color: #ffe5e5;
   color: #800;
-  text-decoration: underline dotted '#b00';
+  padding: 0.15em;
+}
+
+.CorrectedLine .Correction.Selected {
+  background-color: #ffd6d6;
+  color: #a00;
+  border: 1px dotted #b00;
+  text-decoration: none;
+}
+
+.CorrectionView {
+  background-color: #d6ffd6;
+  color: #0a0;
+  border: 1px solid #0a0;
+  padding: 0.5em;
+  margin-top: 0.8em;
+}
+
+.CorrectionView .Message {
+  font-style: italic;
+}
+
+.CorrectionView .Suggestions {
+  margin: 0;
+  padding: 0.2em 1.5em 0;
+}
+
+.CorrectionView .Suggestions li {
+  margin: 0.1em 0;
 }

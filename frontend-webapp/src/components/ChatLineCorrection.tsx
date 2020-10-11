@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react'
 import { CorrectionLine } from '../interfaces/interfaces'
-import CorrectionHighlighter from './CorrectionHighlighter'
-import CorrectionItem from './CorrectionItem'
+import Corrections from './Corrections'
 
 export default function ChatLineCorrection({
   user,
@@ -11,16 +10,8 @@ export default function ChatLineCorrection({
   return (
     <Fragment>
       <strong>{user}: </strong>
-      <CorrectionHighlighter text={text} corrections={corrections} />
       {corrections.length ? (
-        <Fragment>
-          <p>Possible mistakes found:</p>
-          <ol>
-            {corrections.map((correction, index) => (
-              <CorrectionItem key={index} correction={correction} />
-            ))}
-          </ol>
-        </Fragment>
+        <Corrections text={text} corrections={corrections} />
       ) : (
         <span>Looks good!</span>
       )}

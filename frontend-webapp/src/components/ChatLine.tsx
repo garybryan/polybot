@@ -10,5 +10,5 @@ interface ChatLineProps {
 export default function ChatLine({ line }: ChatLineProps) {
   const content =
     'corrections' in line ? ChatLineCorrection(line) : ChatLineText(line)
-  return <div className="chatLine">{content}</div>
+  return <div className="ChatLine">{content}</div>
 }
