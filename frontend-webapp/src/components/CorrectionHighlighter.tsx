@@ -39,6 +39,7 @@ export default function CorrectionHighlighter({
           selectedCorrection === correction ? 'Selected' : ''
         }`}
         onClick={() => setSelectedCorrection(correction)}
+        title={correction.short_message || correction.message}
       >
         {text.slice(offset, end)}
       </span>

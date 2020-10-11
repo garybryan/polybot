@@ -69,6 +69,7 @@
   background-color: #ffe5e5;
   color: #800;
   padding: 0.15em;
+  cursor: pointer;
 }
 
 .CorrectedLine .Correction.Selected {
