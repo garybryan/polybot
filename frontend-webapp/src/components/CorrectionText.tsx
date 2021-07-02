@@ -18,6 +18,7 @@ export default function CorrectionText({
   setSelectedCorrection
 }: CorrectionProps) {
   const tipId = `correction-tip-${correctionId}`
+
   return (
     <Fragment>
       <span
@@ -29,7 +30,17 @@ export default function CorrectionText({
         {text}
       </span>
       <ReactTooltip id={tipId}>
-        {correction.short_message || correction.message}
+        <p>{correction.message}</p>
+        {correction.suggestions.length && (
+          <strong>
+            Suggestion{correction.suggestions.length !== 1 ? 's' : ''}
+          </strong>
+        )}
+        <ul>
+          {correction.suggestions.map((suggestion, index) => (
+            <li key={index}>{suggestion.value}</li>
+          ))}
+        </ul>
       </ReactTooltip>
     </Fragment>
   )
