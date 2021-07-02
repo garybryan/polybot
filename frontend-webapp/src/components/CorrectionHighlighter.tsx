@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react'
 import { Correction } from '../interfaces/interfaces'
+import CorrectionText from './CorrectionText'
 
 interface CorrectionHighligherProps {
   text: string
@@ -24,6 +25,7 @@ export default function CorrectionHighlighter({
   const nodes: ReactNode[] = []
 
   // Add any text before the first correction.
+  // TODO merge intervals here for overlapping corrections
   if (sortedCorrections[0].offset > 0) {
     nodes.push(text.slice(0, sortedCorrections[0].offset))
   }
@@ -34,15 +36,12 @@ export default function CorrectionHighlighter({
     const end = offset + correction.length
 
     nodes.push(
-      <span
-        className={`Correction ${
-          selectedCorrection === correction ? 'Selected' : ''
-        }`}
-        onClick={() => setSelectedCorrection(correction)}
-        title={correction.short_message || correction.message}
-      >
-        {text.slice(offset, end)}
-      </span>
+      <CorrectionText
+        text={text.slice(offset, end)}
+        correction={correction}
+        isSelected={selectedCorrection === correction}
+        setSelectedCorrection={setSelectedCorrection}
+      />
     )
 
     if (correction.suggestions.length === 1) {

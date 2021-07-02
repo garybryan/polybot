@@ -70,13 +70,13 @@
   color: #800;
   padding: 0.15em;
   cursor: pointer;
+  text-decoration: line-through;
 }
 
 .CorrectedLine .Correction.Selected {
   background-color: #ffd6d6;
   color: #a00;
   border: 1px dotted #b00;
-  text-decoration: none;
 }
 
 .CorrectedLine .Correction.Suggestion {
@@ -84,6 +84,7 @@
   color: #0a0;
   border: 1px solid #0a0;
   cursor: default;
+  text-decoration: none;
 }
 
 .CorrectionView {
