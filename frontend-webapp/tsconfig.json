@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es2015",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "es2020",
+    "lib": ["es2020", "dom", "dom.iterable"],
     "allowJs": true,
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
-    "jsx": "react"
+    "jsx": "react",
+    "moduleResolution": "node"
   }
 }

@@ -1,12 +1,15 @@
 "use strict";
 
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const InterpolateHtmlPlugin = require("interpolate-html-plugin");
 const path = require("path");
 
 module.exports = {
   // Set debugging source maps to be "inline" for
   // simplicity and ease of use
   devtool: "inline-source-map",
+
+  mode: "development",
 
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
@@ -49,6 +52,9 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: path.resolve(__dirname, 'public/index.html'),
       filename: "index.html"
+    }),
+    new InterpolateHtmlPlugin({
+      PUBLIC_URL: '/public'
     })
   ]
 };
