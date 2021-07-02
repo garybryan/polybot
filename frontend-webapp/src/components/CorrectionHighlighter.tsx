@@ -41,6 +41,8 @@ export default function CorrectionHighlighter({
         correction={correction}
         isSelected={selectedCorrection === correction}
         setSelectedCorrection={setSelectedCorrection}
+        key={i}
+        correctionId={i.toString()}
       />
     )
 
