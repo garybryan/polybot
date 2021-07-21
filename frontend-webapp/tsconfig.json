@@ -9,6 +9,8 @@
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "jsx": "react",
-    "moduleResolution": "node"
-  }
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  },
+  "exclude": ["node_modules"]
 }
