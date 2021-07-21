@@ -26,6 +26,7 @@
     "moduleNameMapper": {
       "\\.css$": "identity-obj-proxy"
     },
+    "setupFilesAfterEnv": ["<rootDir>/jest-setup.js"],
     "testEnvironment": "jsdom",
     "transform": {
       "^.+\\.(ts|tsx|js|jsx)$": "ts-jest"
@@ -55,6 +56,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@typescript-eslint/eslint-plugin": "^4.28.1",
     "@typescript-eslint/parser": "^4.28.1",
