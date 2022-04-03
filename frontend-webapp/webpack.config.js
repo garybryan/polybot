@@ -12,7 +12,7 @@ module.exports = {
   mode: "development",
 
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    static: path.join(__dirname, 'dist'),
     historyApiFallback: true,
     hot: true,
     host: '0.0.0.0',

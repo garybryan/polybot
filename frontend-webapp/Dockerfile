@@ -1,5 +1,5 @@
 # Build process
-FROM node:12.13.1-alpine as build-deps
+FROM node:16.14.2-alpine as build-deps
 
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH

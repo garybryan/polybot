@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/jest": "^26.0.23",
-    "@types/node": "^15.14.0",
-    "@types/react": "^17.0.13",
-    "@types/react-dom": "^17.0.8",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^17.0.23",
+    "@types/react": "^17.0.43",
+    "@types/react-dom": "^17.0.14",
     "interpolate-html-plugin": "^4.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-tooltip": "^4.2.21",
-    "typescript": "^4.3.5"
+    "typescript": "^4.6.3"
   },
   "scripts": {
     "start": "webpack serve",
@@ -26,7 +26,9 @@
     "moduleNameMapper": {
       "\\.css$": "identity-obj-proxy"
     },
-    "setupFilesAfterEnv": ["<rootDir>/jest-setup.js"],
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest-setup.js"
+    ],
     "testEnvironment": "jsdom",
     "transform": {
       "^.+\\.(ts|tsx|js|jsx)$": "ts-jest"
@@ -56,31 +58,29 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^12.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.28.1",
-    "@typescript-eslint/parser": "^4.28.1",
-    "css-loader": "^5.2.6",
-    "eslint": "^7.29.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.23.4",
+    "@testing-library/jest-dom": "^5.16.3",
+    "@testing-library/react": "^13.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "eslint": "^7.12.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard-with-typescript": "^21.0.1",
+    "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-react": "^7.24.0",
-    "eslint-plugin-standard": "^5.0.0",
-    "html-webpack-plugin": "^5.3.2",
-    "husky": "^7.0.0",
+    "eslint-plugin-promise": "^5.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "html-webpack-plugin": "^5.5.0",
+    "husky": "^7.0.4",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^27.0.6",
-    "lint-staged": "^11.0.0",
-    "prettier": "^2.3.2",
-    "react-hot-loader": "^4.13.0",
-    "style-loader": "^3.0.0",
-    "ts-jest": "^27.0.4",
-    "ts-loader": "^9.2.3",
-    "webpack": "^5.42.0",
-    "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2"
+    "jest": "^27.5.1",
+    "lint-staged": "^12.3.7",
+    "prettier": "^2.6.2",
+    "style-loader": "^3.3.1",
+    "ts-jest": "^27.1.4",
+    "ts-loader": "^9.2.8",
+    "webpack": "^5.71.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
   }
 }
