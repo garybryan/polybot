@@ -4,8 +4,6 @@ import { Correction } from '../interfaces/interfaces'
 import ChatLineCorrection from './ChatLineCorrection'
 import Corrections from './Corrections'
 
-jest.mock('./Corrections')
-
 describe('ChatLineCorrection', () => {
   const language = 'en-GB'
   const user = 'mock user'
@@ -23,10 +21,7 @@ describe('ChatLineCorrection', () => {
   ]
   const correctionsEmpty: Correction[] = []
 
-  beforeEach(jest.resetAllMocks)
-
-  it.skip('Renders Corrections if there are corrections', () => {
-    // TODO this is broken, unsure why
+  it('Renders corrections if there are corrections', () => {
     render(
       <ChatLineCorrection
         language={language}
@@ -35,13 +30,7 @@ describe('ChatLineCorrection', () => {
         corrections={corrections}
       />
     )
-    expect(Corrections).toHaveBeenCalledTimes(1)
-    expect(Corrections).toHaveBeenCalledWith({
-      language,
-      user,
-      text,
-      corrections,
-    })
+    expect(screen.getByTestId('corrections')).toBeInTheDocument()
   })
 
   it('Does not render corrections if there are no corrections', () => {
@@ -53,7 +42,7 @@ describe('ChatLineCorrection', () => {
         corrections={correctionsEmpty}
       />
     )
-    expect(Corrections).not.toHaveBeenCalled()
+    expect(screen.queryByTestId('corrections')).not.toBeInTheDocument()
     expect(screen.getByText('Looks good!')).toBeInTheDocument()
   })
 })

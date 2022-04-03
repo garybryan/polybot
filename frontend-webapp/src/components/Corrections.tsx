@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import { Correction, CorrectionLine } from '../interfaces/interfaces'
 import CorrectionHighlighter from './CorrectionHighlighter'
 import CorrectionView from './CorrectionView'
@@ -8,7 +8,7 @@ export default function Corrections({ text, corrections }: CorrectionLine) {
     corrections[0]
   )
   return (
-    <Fragment>
+    <div data-testid="corrections">
       <CorrectionHighlighter
         text={text}
         corrections={corrections}
@@ -16,6 +16,6 @@ export default function Corrections({ text, corrections }: CorrectionLine) {
         setSelectedCorrection={setSelectedCorrection}
       />
       <CorrectionView correction={selectedCorrection} />
-    </Fragment>
+    </div>
   )
 }
