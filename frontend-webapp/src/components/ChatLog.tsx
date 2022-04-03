@@ -10,10 +10,11 @@ interface ChatLogProps {
 export default function ChatLog({ log }: ChatLogProps) {
   const logRef = useRef<HTMLDivElement>(null)
 
+  // TODO consider making a custom hook for scrollIntoView to separate it from this component.
   useEffect(() => {
     if (logRef && logRef.current && logRef.current.lastElementChild) {
       logRef.current.lastElementChild.scrollIntoView({
-        behavior: 'smooth'
+        behavior: 'smooth',
       })
     }
   }, [log])
