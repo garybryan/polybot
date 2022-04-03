@@ -1,18 +1,9 @@
-import React, { useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { Language, LogLine, TextLine } from '../interfaces/interfaces'
 
 const defaultLanguage = 'en-GB'
 const languageKey = 'polybot-language'
-
-interface State {
-  text: string
-  language: string
-}
-
-const initialState = {
-  text: '',
-  language: localStorage.getItem(languageKey) || defaultLanguage
-}
+const initialLanguage = localStorage.getItem(languageKey) || defaultLanguage
 
 interface ChatLineFormProps {
   appendLine: (line: LogLine) => void
@@ -25,52 +16,52 @@ export default function ChatLineForm({
   sendLine,
   languages
 }: ChatLineFormProps) {
-  const [state, setState] = useState<State>(initialState)
+  const [text, setText] = useState<string>("")
+  const [language, setLanguage] = useState<string>(initialLanguage)
 
-  const onSubmit = (event: React.FormEvent): void => {
+  const onSubmit = useCallback((event: React.FormEvent): void => {
     event.preventDefault()
-    if (state.text) {
+    if (text) {
       const line = {
-        text: state.text.trim(),
-        language: state.language,
+        text: text.trim(),
+        language: language,
         user: 'You'
       }
       sendLine(line)
       appendLine(line)
-      setState({ ...state, text: '' })
+      setText('')
     }
-  }
+  }, [text, language])
 
-  const handleTextChange = (event: React.ChangeEvent): void => {
-    const element = event.target as HTMLInputElement
-    const text = element.value
-    setState({ ...state, text })
-  }
+  const handleTextChange = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
+    setText(event.target.value)
+  }, [])
 
-  const handleLanguageChange = (event: React.ChangeEvent): void => {
-    const element = event.target as HTMLSelectElement
-    const language = element.value
-    setState({ ...state, language })
+  const handleLanguageChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>): void => {
+    const language = event.target.value
+    setLanguage(language)
     localStorage.setItem(languageKey, language)
-  }
+  }, [])
+
+  const languageOptions = useMemo(() => languages.map(language => (
+    <option key={language.code} value={language.code}>
+      {language.name}
+    </option>
+  )), [languages])
 
   return (
     <form onSubmit={onSubmit} className="ChatLineForm">
       <select
-        value={state.language}
+        value={language}
         className="LanguageSelect"
         onChange={handleLanguageChange}
       >
-        {languages.map(language => (
-          <option key={language.code} value={language.code}>
-            {language.name}
-          </option>
-        ))}
+        {languageOptions}
       </select>
       <input
         placeholder="Type some text..."
         type="text"
-        value={state.text}
+        value={text}
         onChange={handleTextChange}
         className="ChatLineInput"
       />

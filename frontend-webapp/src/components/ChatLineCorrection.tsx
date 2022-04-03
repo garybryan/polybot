@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React  from 'react'
 import { CorrectionLine } from '../interfaces/interfaces'
 import Corrections from './Corrections'
 
@@ -9,7 +9,7 @@ export default function ChatLineCorrection({
   language
 }: CorrectionLine) {
   return (
-    <Fragment>
+    <>
       <strong>{user}: </strong>
       {corrections.length ? (
         <Corrections
@@ -21,6 +21,6 @@ export default function ChatLineCorrection({
       ) : (
         <span>Looks good!</span>
       )}
-    </Fragment>
+    </>
   )
 }

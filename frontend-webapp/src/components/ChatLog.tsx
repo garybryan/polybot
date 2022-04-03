@@ -16,7 +16,7 @@ export default function ChatLog({ log }: ChatLogProps) {
         behavior: 'smooth'
       })
     }
-  })
+  }, [log])
 
   return (
     <div className="ChatLog" ref={logRef}>

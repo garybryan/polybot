@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { LogLine } from '../interfaces/interfaces'
 import ChatLineCorrection from './ChatLineCorrection'
 import ChatLineText from './ChatLineText'
