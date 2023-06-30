@@ -24,6 +24,7 @@ Front-end and end-to-end tests not yet implemented.
 
 ## Known issues
 
+- **`frontend-webapp` container currently not building due to permissions and changes in the Node base image, and dependencies not being installed properly.**
 - Texts are not corrected properly when "English" is selected; a regional variant e.g. "English (GB)" must be chosen.
 - It doesn't look very good yet, and presentation of corrections and suggestions is to be improved!
 - Corrections are currently only in the same language as the message, e.g. German grammar mistakes are explained in German, which might not be very friendly for beginners.
